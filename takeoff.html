@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1a1f2e">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Drywall Tally v14.34</title>
+  <title>Drywall Tally v14.35</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
 
 
@@ -566,7 +564,7 @@
     Drywall Tally
   </div>
   <button class="drawer-new-btn" onclick="newJob()">+ New Job</button>
-  <div style="font-size:10px;color:rgba(255,255,255,0.3);text-align:right;padding:2px 4px 6px;letter-spacing:0.04em">v14.34 · May 16, 2026</div>
+  <div style="font-size:10px;color:rgba(255,255,255,0.3);text-align:right;padding:2px 4px 6px;letter-spacing:0.04em">v14.35 · May 16, 2026</div>
   <div class="drawer-label">Jobs</div>
   <div class="drawer-job-list" id="drawer-job-list"></div>
   <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.12)">
@@ -4206,12 +4204,13 @@ function showReport() {
       totalTapers   += tapersAmount;
 
 
-      // Scaffolding/Cleaning/Touchup now stored as job detail toggles
-      const jd = J()?.details || {};
-      if (jd.scaffolding) laborCost += gPrices['scaffolding'] > 0 ? gPrices['scaffolding'] : 100;
-      if (jd.cleaning)    laborCost += gPrices['cleaning']    > 0 ? gPrices['cleaning']    : 300;
-      if (jd.touchup)     laborCost += gPrices['tpy_flat']    > 0 ? gPrices['tpy_flat']    : 280;
-    });
+    }); // end j.areas.forEach for laborCost
+
+    // ── Job costs — added once per job, not per area ──
+    const jd = J()?.details || {};
+    if (jd.scaffolding) laborCost += gPrices['scaffolding'] > 0 ? gPrices['scaffolding'] : 100;
+    if (jd.cleaning)    laborCost += gPrices['cleaning']    > 0 ? gPrices['cleaning']    : 300;
+    if (jd.touchup)     laborCost += gPrices['tpy_flat']    > 0 ? gPrices['tpy_flat']    : 280;
 
     totalLabor = laborCost;
     totalMaterial = matCost;
