@@ -1,8 +1,5 @@
 const CACHE_NAME = 'drywall-tally-v14.34';
-const URLS_TO_CACHE = [
-  '/drywall-takeoff.html',
-  '/manifest.json'
-];
+const URLS_TO_CACHE = ['/takeoff.html', '/manifest.json'];
 
 // Install: Cache the app shell
 self.addEventListener('install', event => {
@@ -40,7 +37,7 @@ self.addEventListener('fetch', event => {
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request).catch(() => {
-        return caches.match('/drywall-takeoff.html');
+        return caches.match('/takeoff.html');
       })
     );
     return;
